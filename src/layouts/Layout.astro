@@ -1,0 +1,43 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+<style is:global>
+	@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+	:root {
+		/* colors */
+		--gray-very-dark: #111315;
+		--gray-dark: #1b1d1f;
+		--gray: #6f757c;
+		--ligth-green: #bee3cc;
+		--skin: #fef7ee;
+		--yellow: #f6c768;
+		--red: #ed735d;
+
+		background-color: #111315;
+		font-family: "DM Sans", sans-serif;
+		--body-font-size: 16px;
+	}
+
+	body {
+		font-size: var(--body-font-size);
+	}
+</style>

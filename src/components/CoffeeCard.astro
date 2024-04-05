@@ -1,0 +1,55 @@
+---
+import type { CoffeeType } from "../types";
+import { formatNum } from "../helpers/formatNum";
+
+const { data } = Astro.props;
+---
+
+{
+    data.map((coffee: CoffeeType) => (
+        <div class="space-y-2.5">
+            <div class="relative">
+                <img
+                    class="w-full rounded-xl"
+                    src={coffee.image}
+                    alt="Image Coffee"
+                />
+                {coffee.popular && (
+                    <div class="bg-[var(--yellow)] inline-block rounded-full px-4 py-1 absolute top-2 left-2">
+                        <p class="text-[10px] font-semibold">Popular</p>
+                    </div>
+                )}
+            </div>
+            <div class="flex justify-between">
+                <h3 class="text-[var(--skin)] font-bold">{coffee.name}</h3>
+                <div class="bg-[var(--ligth-green)] px-2 py-1 text-[12px] rounded-md">
+                    <p class="font-bold">{coffee.price}</p>
+                </div>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-x-1">
+                    <img
+                        src={`/icons/${coffee.votes ? "Star_fill" : "Star"}.svg`}
+                        alt="icon start"
+                        aria-hidden="true"
+                    />
+                    {coffee.votes ? (
+                        <p class="text-[var(--skin)]">
+                            {formatNum(+coffee.rating)} {""}{" "}
+                            <span class="text-[var(--gray)]">
+                                ({coffee.votes} votes)
+                            </span>
+                        </p>
+                    ) : (
+                        <p class="text-[var(--gray)]">No ratings</p>
+                    )}
+                </div>
+                {!coffee.available && (
+                    <p class="text-[var(--red)] font-medium text-[14px]">
+                        Sold out
+                    </p>
+                )}
+            </div>
+        </div>
+    ))
+}
